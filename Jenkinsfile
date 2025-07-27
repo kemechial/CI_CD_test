@@ -31,21 +31,15 @@ pipeline {
             }
         }
         
-        stage('Test') {
+       stage('Test') {
             steps {
-                sh 'npm test'
+                // Use the new script that generates the report
+                sh 'npm run test:ci'
             }
             post {
                 always {
-                    junit 'coverage/junit.xml'
-                    publishHTML([
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true,
-                        reportDir: 'coverage',
-                        reportFiles: 'index.html',
-                        reportName: 'Coverage Report'
-                    ])
+                    // Point to the correct path for the generated report
+                    junit 'test-results/jest/results.xml'
                 }
             }
         }
