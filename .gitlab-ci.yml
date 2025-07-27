@@ -1,0 +1,52 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+before_script:
+  - docker --version
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t todo-app:$CI_COMMIT_SHA .
+    - docker tag todo-app:$CI_COMMIT_SHA todo-app:latest
+  artifacts:
+    reports:
+      docker:
+        - todo-app:latest
+
+test:
+  stage: test
+  image: node:16
+  script:
+    - npm install
+    - npm test
+    - npm run lint
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+  artifacts:
+    reports:
+      junit: coverage/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+
+deploy:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker run -d -p 8080:80 todo-app:latest
+  only:
+    - main
+  environment:
+    name: production
+    url: http://your-server:8080

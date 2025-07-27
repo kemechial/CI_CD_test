@@ -1,0 +1,29 @@
+{
+  "name": "todo-app-cicd",
+  "version": "1.0.0",
+  "description": "Simple Todo App for CI/CD Practice",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "serve": "http-server src -p 8080",
+    "lint": "eslint src/*.js"
+  },
+  "keywords": ["todo", "ci/cd", "practice"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "jest-environment-jsdom": "^27.5.1",
+    "eslint": "^8.0.0",
+    "http-server": "^14.0.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js"
+    ]
+  }
+}
