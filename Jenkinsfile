@@ -19,14 +19,16 @@ pipeline {
             steps {
                 checkout scm
             }
+            
+        }
 
         stage('Debug Info') {
             steps {
                 sh 'echo building branch: $BRANCH_NAME'
-            } 
-         }
+            }
         }
-        
+
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
