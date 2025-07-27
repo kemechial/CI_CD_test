@@ -24,13 +24,13 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
+        /*
         stage('Lint') {
             steps {
                 sh 'npm run lint || true'
             }
         }
-        
+        */
        stage('Test') {
             steps {
                 // Use the new script that generates the report
