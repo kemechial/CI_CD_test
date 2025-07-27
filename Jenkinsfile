@@ -54,7 +54,7 @@ pipeline {
         
         stage('Deploy') {
             when {
-                branch origin/master'
+                branch 'origin/master'
             }
             steps {
                 script {
