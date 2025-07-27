@@ -11,6 +11,12 @@ pipeline {
         DOCKER_IMAGE = 'todo-app'
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
+
+    stage('Debug Info') {
+            steps {
+                sh 'echo building branch: $BRANCH_NAME'
+            }
+        }
     
     stages {
         stage('Checkout') {
