@@ -53,9 +53,11 @@ pipeline {
         }
         
         stage('Deploy') {
+            /*
             when {
                 branch 'origin/master'
             }
+            */
             steps {
                 script {
                     sh """
