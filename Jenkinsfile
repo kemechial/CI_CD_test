@@ -12,17 +12,19 @@ pipeline {
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
 
-    stage('Debug Info') {
-            steps {
-                sh 'echo building branch: $BRANCH_NAME'
-            }
-        }
+   
     
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
+
+        stage('Debug Info') {
+            steps {
+                sh 'echo building branch: $BRANCH_NAME'
+            } 
+         }
         }
         
         stage('Install Dependencies') {
