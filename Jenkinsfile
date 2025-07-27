@@ -1,6 +1,12 @@
 pipeline {
     agent any
-    
+
+       tools {
+        // This tells Jenkins to make the 'NodeJS-16' tool available
+        nodejs 'NodeJS-16' 
+    }
+
+
     environment {
         DOCKER_IMAGE = 'todo-app'
         DOCKER_TAG = "${BUILD_NUMBER}"
