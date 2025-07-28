@@ -18,10 +18,10 @@ build:
   script:
     - docker build -t todo-app:$CI_COMMIT_SHA .
     - docker tag todo-app:$CI_COMMIT_SHA todo-app:latest
+    - docker save -o todo-app.tar todo-app:latest   # Save the image to a tarball
   artifacts:
-    reports:
-      docker:
-        - todo-app:latest
+    paths:
+      - todo-app.tar    # This makes it available to later jobs
 
 test:
   stage: test
